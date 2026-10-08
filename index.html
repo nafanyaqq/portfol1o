@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Портфолио: сайты и графика</title>
+<meta name="description" content="Портфолио веб-дизайнера: макеты сайтов, превью, карточки товаров и другая графика.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Портфолио: сайты и графика">
+<meta property="og:description" content="Макеты сайтов, превью, карточки товаров и другая графика.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23121211'/%3E%3Cpath d='M32 12c2.2 12.6 7.4 17.8 20 20-12.6 2.2-17.8 7.4-20 20-2.2-12.6-7.4-17.8-20-20 12.6-2.2 17.8-7.4 20-20Z' fill='%23F6F5F1'/%3E%3C/svg%3E">
+<style>
+:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);-webkit-text-size-adjust:100%}
+body{margin:0;font:14px system-ui,sans-serif}
+img{max-width:100%}
+[hidden]{display:none!important}
+@font-face{font-family:'Onest';src:url(onest.woff) format('woff');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Playfair Display';src:url(playfair.woff) format('woff');font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Playfair Display';src:url(playfair-italic.woff) format('woff');font-weight:400 900;font-style:italic;font-display:swap}
+</style>
+</head>
+<body>
+<style>
+/* Layout: one light look, after the reference. Header with a pill nav → centred two-line
+   headline (roman + italic) → stage: blurred figure with a slow 3D ring of site screenshots
+   around the head, a tilted white card on each side (left opens Sites, right opens Other).
+   Sections and projects are separate views inside the same page. */
+:root{
+  color-scheme:light;
+  --bg:#F6F5F1; --card:#FFFFFF; --ink:#121211; --muted:#74726C; --line:#E2E0D9; --line-2:#CFCDC5;
+  --pill:#121211; --pill-ink:#FFFFFF; --glass:rgb(255 255 255 / .66); --glass-edge:rgb(255 255 255 / .9);
+  --tile:#EAE8E1; --shade:rgb(40 36 24 / .10); --shade-2:rgb(40 36 24 / .18); --dark:#151514; --dark-ink:#F3F2EE; --dark-muted:#A5A39C;
+  --serif:'Playfair Display','Georgia','Times New Roman',serif;
+  --sans:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --R:clamp(140px,21vw,270px);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,figure{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,48px)}
+.serif{font-family:var(--serif);font-weight:500;letter-spacing:-.02em}
+.muted{color:var(--muted)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.top__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;min-height:72px}
+.logo{justify-self:start;font-weight:600;font-size:20px;letter-spacing:-.02em;background:none;border:0;padding:6px 0;cursor:pointer}
+.logo sup{font-size:.5em;margin-left:1px;position:relative;top:-.5em}
+.pillnav{position:relative;display:flex;gap:2px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--card);max-width:100%;overflow-x:auto}
+.pillnav a{position:relative;z-index:1;padding:8px 16px;border-radius:999px;font-size:14px;font-weight:500;white-space:nowrap;transition:color .2s}
+.pillnav a:not(.is-on):hover{color:var(--muted)}
+.ind{position:absolute;left:0;top:4px;bottom:4px;width:0;border-radius:999px;background:linear-gradient(115deg,#FFFFFF 0%,#EFEDE6 55%,#E4E1D8 100%);box-shadow:inset 0 0 0 1px var(--line);pointer-events:none}
+.pillnav.ready .ind{transition:transform .55s cubic-bezier(.3,.8,.2,1),width .55s cubic-bezier(.3,.8,.2,1)}
+main{overflow-x:clip}
+.cta{justify-self:end}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;border:1px solid var(--line-2);background:var(--card);font-weight:500;font-size:15px;cursor:pointer;white-space:nowrap;transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn--dark{background:var(--pill);color:var(--pill-ink);border-color:var(--pill)}
+.btn svg{width:15px;height:15px;flex:none}
+@media (max-width:720px){
+  .top__in{grid-template-columns:1fr auto;row-gap:0;padding-block:10px}
+  .pillnav{grid-column:1 / -1;grid-row:2;justify-self:center;margin-top:8px}
+  .cta{padding:10px 16px;font-size:14px}
+  .pillnav a{padding:8px 12px;font-size:13px}
+}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-top:clamp(20px,3.6vw,44px);background:radial-gradient(60% 46% at 50% 100%,#FFFFFF 0,transparent 100%)}
+.copy{position:relative;z-index:4;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.copy h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,7vw,5.5rem);line-height:1;letter-spacing:-.03em;text-wrap:balance}
+.copy h1 em{display:block;font-style:italic}
+.copy p{max-width:44ch;font-size:clamp(1rem,1.45vw,1.2rem);color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.actions .btn{pointer-events:auto}
+.badge{position:absolute;right:clamp(24px,7vw,110px);top:clamp(90px,10vw,140px);width:92px;height:92px;z-index:3}
+.badge svg{width:100%;height:100%;overflow:visible}
+.badge .rot{transform-origin:50% 50%;animation:turn 36s linear infinite}
+.badge text{font:500 8.6px var(--sans);fill:var(--ink)}
+@keyframes turn{to{transform:rotate(360deg)}}
+
+.stage{position:relative;height:calc(var(--R)*2.08);margin-top:clamp(14px,2vw,26px);perspective:1300px;perspective-origin:50% 36%}
+.scene{position:absolute;bottom:0;left:50%;width:calc(var(--R)*2.3);height:calc(var(--R)*2.01);margin-left:calc(var(--R)*-1.403);transform-style:preserve-3d}
+.figure{position:absolute;inset:0;width:100%;height:100%;max-width:none;pointer-events:none;user-select:none;transform:translateZ(0)}
+.ring{position:absolute;left:61%;top:37%;width:0;height:0;transform-style:preserve-3d;transform:rotateX(-7deg) rotateZ(-4deg) rotateY(0deg);animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotateX(-7deg) rotateZ(-4deg) rotateY(-360deg)}}
+.tile{position:absolute;left:calc(var(--w)*-.5);top:calc(var(--h)*-.5 + var(--dy));width:var(--w);height:var(--h);transform:rotateY(var(--a)) translateZ(var(--R));transform-style:preserve-3d;cursor:pointer}
+.tile:focus-visible{outline:none}
+.face{position:absolute;inset:0;border-radius:calc(var(--R)*.07);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 calc(var(--R)*.04) calc(var(--R)*.12) var(--shade-2);transition:transform .2s}
+.face--b{transform:rotateY(180deg);filter:brightness(.86) saturate(.75)}
+.face img{display:block;width:100%;height:100%;object-fit:cover;max-width:none}
+.tile:hover .face--f,.tile:focus-visible .face--f{transform:scale(1.05)}
+.tile:focus-visible .face{outline:2px solid var(--ink);outline-offset:2px}
+.plaque{display:flex;align-items:center;gap:calc(var(--R)*.05);padding-inline:calc(var(--R)*.06);background:var(--glass);border:1px solid var(--glass-edge);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.plaque i{flex:none;width:calc(var(--R)*.15);height:calc(var(--R)*.15);border-radius:calc(var(--R)*.045);background:var(--c);box-shadow:inset 0 0 0 1px rgb(255 255 255 / .5)}
+.plaque b{display:block;font-weight:500;font-size:calc(var(--R)*.085);line-height:1.15;letter-spacing:-.01em;white-space:nowrap}
+.plaque small{display:block;font-size:calc(var(--R)*.05);color:var(--muted);white-space:nowrap}
+.plaque span{min-width:0;text-align:left}
+
+.wires{position:absolute;left:0;right:0;top:calc(var(--R)*-.62);bottom:0;width:100%;height:calc(100% + var(--R)*.62);pointer-events:none}
+.wires path{fill:none;stroke:var(--line-2);stroke-width:1;vector-effect:non-scaling-stroke}
+.side{position:absolute;z-index:5;display:flex;flex-direction:column;gap:8px;width:214px;padding:22px 22px 24px;background:var(--card);border-radius:28px;box-shadow:0 24px 60px var(--shade),0 2px 6px rgb(40 36 24 / .05);transition:transform .25s;text-align:left}
+.side__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;min-height:34px}
+.side__top svg{width:26px;height:26px}
+.side__go{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line)}
+.side__go svg{width:14px;height:14px}
+.side b{font-weight:500;font-size:20px;line-height:1.2;letter-spacing:-.01em}
+.side small{font-size:14px;color:var(--muted);line-height:1.35}
+.side--l{left:clamp(16px,6vw,96px);top:calc(var(--R)*-.62);transform:rotate(-6deg)}
+.side--r{right:clamp(16px,6vw,96px);top:calc(var(--R)*-.3);transform:rotate(6deg)}
+.side:hover{transform:rotate(0deg) translateY(-6px)}
+.side:hover .side__go{background:var(--pill);color:var(--pill-ink);border-color:var(--pill)}
+.dots{display:flex}
+.dots img{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid var(--card);margin-left:-9px}
+.dots img:first-child{margin-left:0}
+.note{position:absolute;bottom:34px;z-index:5;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--muted);line-height:1.35}
+.note::before{content:"";width:22px;height:1px;background:var(--line-2)}
+.note--l{left:clamp(16px,6vw,96px)}
+.note--r{right:clamp(16px,6vw,96px)}
+.note--r svg{width:18px;height:18px;margin-left:10px}
+.note--r::before{position:absolute;left:-34px;bottom:30px}
+.sides-m{display:none}
+@media (max-width:1100px){
+  .badge,.wires,.note,.stage > .side{display:none}
+  .sides-m{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-block:20px 8px}
+  .sides-m .side{position:static;width:auto;transform:none;border-radius:22px;padding:18px}
+  .sides-m .side b{font-size:17px}
+}
+@media (max-width:560px){.plaque small{display:none}.plaque b{font-size:calc(var(--R)*.1)}}
+@media (prefers-reduced-motion:reduce){.ring,.badge .rot{animation:none}.btn,.side,.face,.slide,.arrow,.pillnav.ready .ind{transition:none}}
+
+/* contacts */
+.contact{margin-block:clamp(28px,5vw,64px);padding:clamp(28px,5vw,64px);background:var(--dark);color:var(--dark-ink);border-radius:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:end;scroll-margin-top:96px}
+.contact h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.02;letter-spacing:-.025em}
+.contact h2 em{display:block}
+.contact p{color:var(--dark-muted);margin-top:16px;max-width:38ch}
+.tg{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 20px;padding-top:22px;border-top:1px solid rgb(255 255 255 / .16)}
+.tg small{display:block;font-size:13px;color:var(--dark-muted);margin-bottom:2px}
+.tg b{font-size:clamp(1.3rem,2.4vw,1.75rem);font-weight:500;user-select:all;overflow-wrap:anywhere}
+.btn--light{background:var(--dark-ink);color:var(--dark);border-color:var(--dark-ink)}
+@media (max-width:820px){.contact{grid-template-columns:minmax(0,1fr)}}
+
+/* section + project views */
+.page{padding-block:clamp(20px,3.5vw,44px) clamp(40px,6vw,80px)}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--muted);padding:6px 0;background:none;border:0;cursor:pointer}
+.back:hover{color:var(--ink)}
+.back svg{width:14px;height:14px}
+.page__head{display:flex;flex-direction:column;gap:14px;margin-block:18px clamp(26px,4vw,48px);max-width:760px}
+.page__head h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1;letter-spacing:-.03em}
+.page__head h1 sup{font:500 .26em var(--sans);letter-spacing:0;color:var(--muted);margin-left:8px;vertical-align:top;position:relative;top:.9em}
+.page__head p{font-size:clamp(1rem,1.4vw,1.15rem);color:var(--muted);max-width:56ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);font-size:13px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(26px,3.4vw,40px) clamp(18px,2.4vw,28px)}
+.work{display:flex;flex-direction:column;gap:16px;cursor:pointer;min-width:0}
+.work__img{display:block;aspect-ratio:16/10;width:100%;max-width:100%;border-radius:18px;overflow:hidden;background:var(--line);box-shadow:0 18px 44px var(--shade)}
+.work__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.work:hover .work__img img{transform:scale(1.04)}
+.work__meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.work__meta h3{font-family:var(--serif);font-weight:500;font-size:26px;letter-spacing:-.02em;line-height:1.1}
+.work__meta span{font-size:14px;color:var(--muted);text-align:right}
+.frame{max-width:1120px;margin-inline:auto;border-radius:18px;overflow:hidden;background:var(--card);box-shadow:0 30px 80px var(--shade-2)}
+.frame__bar{display:flex;align-items:center;gap:7px;height:38px;padding-inline:16px;border-bottom:1px solid var(--line)}
+.frame__bar i{width:10px;height:10px;border-radius:50%;background:var(--line-2)}
+.frame__bar span{margin-left:10px;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.frame img{display:block;width:100%;height:auto}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;max-width:1120px;margin:clamp(28px,4vw,48px) auto 0}
+.pieces{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(28px,3.4vw,44px) clamp(16px,2vw,24px)}
+.piece{grid-column:span var(--span);display:flex;flex-direction:column;gap:14px;min-width:0}
+.piece__media{position:relative;flex:1 1 auto;aspect-ratio:var(--ar);width:100%;max-width:100%;border-radius:18px;overflow:hidden;background:var(--tile);box-shadow:0 18px 44px var(--shade)}
+.piece__open{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;background:none;cursor:zoom-in}
+.slide{position:absolute;inset:0;display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:center;padding:var(--pad,0);opacity:0;transition:opacity .5s}
+.slide.is-on{opacity:1}
+.slide img{display:block;max-width:100%;max-height:100%;width:auto;height:auto}
+.piece--cover .slide img{width:100%;height:100%;object-fit:cover}
+.piece--contain .slide{--pad:clamp(14px,2.2vw,26px)}
+.piece--contain .slide img{box-shadow:0 10px 30px var(--shade-2)}
+.piece--phone .slide img{border-radius:14px}
+.arrow{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;padding:0;background:var(--card);color:var(--ink);box-shadow:0 6px 18px var(--shade-2);cursor:pointer;opacity:0;transition:opacity .2s,transform .2s}
+.arrow svg{width:16px;height:16px}
+.arrow--p{left:12px}
+.arrow--n{right:12px}
+.piece__media:hover .arrow,.arrow:focus-visible{opacity:1}
+.arrow:hover{transform:scale(1.08)}
+@media (hover:none){.arrow{opacity:1}}
+.count{position:absolute;left:50%;bottom:12px;z-index:2;transform:translateX(-50%);padding:4px 10px;border-radius:999px;background:rgb(18 18 17 / .62);color:#FFFFFF;font-size:12px;font-variant-numeric:tabular-nums;pointer-events:none}
+@media (max-width:820px){.piece{grid-column:1 / -1}.piece__media{aspect-ratio:var(--mr)}}
+dialog.lb{border:0;padding:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;background:rgb(16 16 15 / .96);color:var(--dark-ink)}
+dialog.lb[open]{display:grid;grid-template:minmax(0,1fr) auto / minmax(0,1fr)}
+dialog.lb::backdrop{background:rgb(16 16 15 / .6)}
+.lb__stage{display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:center;padding:60px clamp(12px,6vw,84px) 6px;cursor:zoom-out}
+.lb__stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:6px;cursor:default}
+.lb__cap{padding:10px 16px calc(16px + env(safe-area-inset-bottom,0px));text-align:center;font-size:14px;color:var(--dark-muted)}
+.lb .arrow{position:fixed;opacity:1}
+.lb__close{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:14px;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
+.foot{padding-block:22px 36px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+/* ───────── телефон и планшет ───────── */
+a,button,[role="button"]{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.ring{will-change:transform}
+.piece__media,.piece__open{touch-action:pan-y}
+.lb__stage{touch-action:pan-y pinch-zoom}
+dialog.lb{height:100dvh;overscroll-behavior:contain}
+.btn:active,.work:active .work__img,.sides-m .side:active{transform:scale(.98)}
+.frame__scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.frame--zoom .frame__scroll img{width:240%;max-width:none}
+.frame__zoom{display:none;flex:none;margin-left:auto;padding:5px 11px;border-radius:999px;border:1px solid var(--line-2);background:none;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap}
+@supports not (overflow-x:clip){main{overflow-x:hidden}}
+@media (hover:none){
+  .btn:hover,.arrow:hover{transform:none}
+  .tile:hover .face--f{transform:none}
+  .work:hover .work__img img{transform:none}
+  .pillnav a:not(.is-on):hover{color:inherit}
+}
+@media (max-width:1100px),(hover:none){
+  /* стекло с размытием внутри 3D-сцены мерцает на телефонах: заменяем плотной подложкой */
+  .plaque{background:rgb(255 255 255 / .92);backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@media (max-width:1100px){
+  :root{--R:clamp(140px,40vw,230px)}
+  .badge{display:block;top:auto;right:14px;bottom:14px;width:64px;height:64px}
+  .sides-m .side__top{margin-bottom:6px}
+}
+@media (max-width:820px){.frame__zoom{display:block}}
+@media (max-width:720px){
+  .top{position:static;background:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .top__in{padding-block:12px 2px}
+  .pillnav{position:fixed;left:50%;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;transform:translateX(-50%);margin:0;padding:5px;max-width:calc(100% - 20px);background:rgb(255 255 255 / .88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 30px var(--shade-2)}
+  .pillnav a{padding:11px 12px;font-size:13.5px}
+  .ind{top:5px;bottom:5px}
+  .copy h1{font-size:clamp(2.4rem,10.5vw,3.3rem)}
+  .foot{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .contact{scroll-margin-top:16px}
+}
+@media (max-width:350px){.pillnav a{padding:10px 8px;font-size:12.5px}}
+</style>
+
+<header class="top">
+  <div class="wrap top__in">
+    <button class="logo" type="button" data-go="">Портфолио<sup>°</sup></button>
+    <nav class="pillnav" aria-label="Разделы">
+      <span class="ind" aria-hidden="true"></span>
+      <a href="#" data-go="" data-nav="home">Главная</a>
+      <a href="#sites" data-go="sites" data-nav="sites">Сайты</a>
+      <a href="#other" data-go="other" data-nav="other">Остальное</a>
+      <a href="#contacts" data-go="contacts" data-nav="contacts">Контакты</a>
+    </nav>
+    <a class="btn btn--dark cta" href="https://t.me/nafanyaqq" target="_blank" rel="noopener">Написать
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+  <!-- ───────── главная ───────── -->
+  <section class="view" id="v-home">
+    <div class="hero">
+      <div class="wrap">
+        <div class="copy">
+          <h1>Сайты, которые <em>хочется листать.</em></h1>
+          <p>Портфолио веб-дизайнера: макеты сайтов и другая графика. Нажми на любую карточку, чтобы рассмотреть работу поближе.</p>
+          <div class="actions">
+            <a class="btn btn--dark" href="#sites" data-go="sites">Смотреть сайты
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg>
+            </a>
+            <a class="btn" href="#other" data-go="other">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="8" r="8"/><path d="M6.4 5v6l5-3z" fill="#fff"/></svg>
+              Остальное
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs><path id="circ" d="M50 50m-38 0a38 38 0 1 1 76 0a38 38 0 1 1-76 0"/></defs>
+          <g class="rot"><text><textPath href="#circ" textLength="232" lengthAdjust="spacing">ПОРТФОЛИО · САЙТЫ · ГРАФИКА · 2026 ·</textPath></text></g>
+          <path d="M50 36c1.6 9 5 12.4 14 14-9 1.6-12.4 5-14 14-1.6-9-5-12.4-14-14 9-1.6 12.4-5 14-14Z" fill="#121211"/>
+        </svg>
+      </div>
+
+      <div class="stage" id="stage">
+        <svg class="wires" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M15 34 C 16 60, 27 68, 40 70"/>
+          <path d="M85 50 C 85 72, 75 82, 61 80"/>
+        </svg>
+
+        <a class="side side--l" href="#sites" data-go="sites">
+          <span class="side__top">
+            <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="21" height="17" rx="3.5"/><path d="M2.5 9.5h21M6 7h.01M8.8 7h.01"/></svg>
+            <span class="side__go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span>
+          </span>
+          <b>Сайты и&nbsp;макеты.</b>
+          <small>Макеты первых страниц сайтов.</small>
+        </a>
+
+        <a class="side side--r" href="#other" data-go="other">
+          <span class="side__top">
+            <span class="dots"><img src="dot-1.jpg" alt=""><img src="dot-2.jpg" alt=""><img src="dot-3.jpg" alt=""></span>
+            <span class="side__go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span>
+          </span>
+          <b>Всё остальное.</b>
+          <small>Превью, карточка товара, журнал.</small>
+        </a>
+
+        <div class="scene">
+          <img class="figure" src="figure.webp" alt="">
+          <div class="ring" id="ring"></div>
+        </div>
+
+        <div class="note note--r">
+          <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 0c1 5.6 3.4 8 9 9-5.6 1-8 3.4-9 9-1-5.6-3.4-8-9-9 5.6-1 8-3.4 9-9Z" fill="#121211"/></svg>
+          <span>Меньше шума.<br>Больше смысла.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="sides-m">
+        <a class="side" href="#sites" data-go="sites"><span class="side__top"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="21" height="17" rx="3.5"/><path d="M2.5 9.5h21M6 7h.01M8.8 7h.01"/></svg><span class="side__go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span></span><b>Сайты и&nbsp;макеты.</b><small>Макеты первых страниц сайтов.</small></a>
+        <a class="side" href="#other" data-go="other"><span class="side__top"><span class="dots"><img src="dot-1.jpg" alt=""><img src="dot-2.jpg" alt=""><img src="dot-3.jpg" alt=""></span><span class="side__go"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></span></span><b>Всё остальное.</b><small>Превью, карточка товара, журнал.</small></a>
+      </div>
+
+      <section class="contact" id="contacts">
+        <div>
+          <h2>Нужен сайт или другое <em>дизайнерское решение?</em></h2>
+          <p>Буду рад помочь. Напишите в Telegram, обсудим задачу.</p>
+        </div>
+        <div class="tg">
+          <div><small>Telegram</small><b>@nafanyaqq</b></div>
+          <a class="btn btn--light" href="https://t.me/nafanyaqq" target="_blank" rel="noopener">Написать
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>
+          </a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ───────── сайты ───────── -->
+  <section class="view" id="v-sites" hidden>
+    <div class="wrap page">
+      <button class="back" type="button" data-go=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5"/></svg>На главную</button>
+      <div class="page__head">
+        <h1>Сайты<sup id="n-sites"></sup></h1>
+        <p>Сайты сделаны в виде макетов первых страниц. Нажми на проект, чтобы пролистать его.</p>
+      </div>
+      <div class="grid" id="g-sites"></div>
+    </div>
+  </section>
+
+  <!-- ───────── проект ───────── -->
+  <section class="view" id="v-project" hidden>
+    <div class="wrap page" id="project"></div>
+  </section>
+
+  <!-- ───────── остальное ───────── -->
+  <section class="view" id="v-other" hidden>
+    <div class="wrap page">
+      <button class="back" type="button" data-go=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5"/></svg>На главную</button>
+      <div class="page__head">
+        <h1>Остальное</h1>
+        <p>Превью для видео, карточка товара, журнал и страница-переходник со ссылками. Нажми на работу, чтобы открыть её крупно.</p>
+      </div>
+      <div class="pieces" id="g-other"></div>
+    </div>
+  </section>
+</main>
+
+<dialog class="lb" id="lb" aria-label="Просмотр работы">
+  <button class="lb__close" id="lb-close" type="button" aria-label="Закрыть">×</button>
+  <button class="arrow arrow--p" id="lb-prev" type="button" aria-label="Назад"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg></button>
+  <button class="arrow arrow--n" id="lb-next" type="button" aria-label="Дальше"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
+  <div class="lb__stage" id="lb-stage"><img id="lb-img" alt=""></div>
+  <div class="lb__cap" id="lb-cap"></div>
+</dialog>
+
+<footer class="wrap foot"><span>© 2026 Портфолио</span><span>Сайты · Остальное · Контакты</span></footer>
+
+<script src="works.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const byId = id => SITES.find(s => s.id === id);
+
+/* кольцо */
+$('#ring').innerHTML = RING.map((t, i) => {
+  const s = byId(t.site), a = i * 360 / RING.length + 20;
+  const inner = t.plaque
+    ? `<i></i><span><b>${s.name}</b><small>${s.kind}</small></span>`
+    : `<img src="${t.img}" alt="" draggable="false">`;
+  const cls = t.plaque ? 'face plaque' : 'face';
+  return `<div class="tile" role="button" tabindex="0" data-go="${s.id}" aria-label="Открыть проект: ${s.name}"
+    style="--a:${a}deg;--w:calc(var(--R)*${t.w});--h:calc(var(--R)*${t.h});--dy:calc(var(--R)*${t.dy});--c:${s.color}">
+    <div class="${cls} face--f">${inner}</div><div class="${cls} face--b" aria-hidden="true">${inner}</div></div>`;
+}).join('');
+
+/* раздел «Сайты» */
+$('#n-sites').textContent = SITES.length;
+$('#g-sites').innerHTML = SITES.map(s => `
+  <article class="work" role="button" tabindex="0" data-go="${s.id}" aria-label="Открыть проект: ${s.name}">
+    <span class="work__img"><img src="${s.cover}" alt="Первый экран сайта ${s.name}" loading="lazy"></span>
+    <div class="work__meta"><h3>${s.name}</h3><span>${s.kind}</span></div>
+  </article>`).join('');
+
+/* страница проекта */
+const ARROW_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5"/></svg>';
+const ARROW_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 8h11M9 3.5 13.5 8 9 12.5"/></svg>';
+function renderProject(s){
+  const next = SITES[(SITES.indexOf(s) + 1) % SITES.length];
+  $('#project').innerHTML = `
+    <button class="back" type="button" data-go="sites">${ARROW_L}Все сайты</button>
+    <div class="page__head">
+      <h1>${s.name}</h1>
+      <p>${s.desc}</p>
+      <div class="tags">${s.tags.map(t => `<span>${t}</span>`).join('')}</div>
+    </div>
+    <div class="frame">
+      <div class="frame__bar"><i></i><i></i><i></i><span>${s.url}</span><button class="frame__zoom" type="button" data-zoom>Увеличить</button></div>
+      <div class="frame__scroll"><img src="${s.full}" alt="Макет сайта ${s.name} целиком"></div>
+    </div>
+    <div class="next">
+      <button class="btn" type="button" data-go="sites">${ARROW_L}Все сайты</button>
+      <button class="btn btn--dark" type="button" data-go="${next.id}">Следующий: ${next.name}${ARROW_R}</button>
+    </div>`;
+}
+
+const CH_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>';
+const CH_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>';
+$('#g-other').innerHTML = OTHER.map((p, i) => `
+  <article class="piece ${p.fit.split(' ').map(f => 'piece--' + f).join(' ')}" style="--span:${p.span};--ar:${p.ar};--mr:${p.mr}">
+    <div class="piece__media" data-piece="${i}">
+      <button class="piece__open" type="button" aria-label="Открыть крупно: ${p.name}">
+        ${p.slides.map((sl, k) => `<span class="slide${k ? '' : ' is-on'}"><img src="${sl.src}" alt="${sl.alt}" draggable="false"></span>`).join('')}
+      </button>
+      ${p.slides.length > 1 ? `<button class="arrow arrow--p" type="button" data-step="-1" aria-label="Назад">${CH_L}</button>
+      <button class="arrow arrow--n" type="button" data-step="1" aria-label="Дальше">${CH_R}</button>
+      <span class="count">1 / ${p.slides.length}</span>` : ''}
+    </div>
+    <div class="work__meta"><h3>${p.name}</h3><span>${p.kind}</span></div>
+  </article>`).join('');
+const at = OTHER.map(() => 0);
+/* свайп пальцем влево-вправо; после свайпа ближайший «клик» игнорируется */
+let swipedAt = 0;
+function swipe(el, step){
+  let x0 = null, y0 = 0;
+  el.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') return; x0 = e.clientX; y0 = e.clientY; });
+  el.addEventListener('pointercancel', () => { x0 = null; });
+  el.addEventListener('pointerup', e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+    if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy) * 1.3) { swipedAt = Date.now(); step(dx < 0 ? 1 : -1); }
+  });
+}
+function setSlide(i, k){
+  const n = OTHER[i].slides.length, m = document.querySelector(`[data-piece="${i}"]`);
+  at[i] = (k + n) % n;
+  m.querySelectorAll('.slide').forEach((el, j) => el.classList.toggle('is-on', j === at[i]));
+  const c = m.querySelector('.count'); if (c) c.textContent = `${at[i] + 1} / ${n}`;
+}
+
+/* окно просмотра */
+const lb = $('#lb'); let lbI = 0;
+function showLb(){
+  const p = OTHER[lbI], sl = p.slides[at[lbI]], many = p.slides.length > 1;
+  $('#lb-img').src = sl.src; $('#lb-img').alt = sl.alt;
+  $('#lb-cap').textContent = p.name + (many ? ` · ${at[lbI] + 1} / ${p.slides.length}` : '');
+  $('#lb-prev').hidden = $('#lb-next').hidden = !many;
+}
+const lbStep = d => { setSlide(lbI, at[lbI] + d); showLb(); };
+$('#g-other').addEventListener('click', e => {
+  const m = e.target.closest('.piece__media'); if (!m) return;
+  const i = +m.dataset.piece, arrow = e.target.closest('.arrow');
+  if (Date.now() - swipedAt < 450) return;
+  if (arrow) setSlide(i, at[i] + (+arrow.dataset.step));
+  else { lbI = i; showLb(); lb.showModal(); }
+});
+$('#lb-prev').addEventListener('click', () => lbStep(-1));
+$('#lb-next').addEventListener('click', () => lbStep(1));
+$('#lb-close').addEventListener('click', () => lb.close());
+lb.addEventListener('click', e => { if (Date.now() - swipedAt < 450) return; if (e.target === lb || e.target.id === 'lb-stage') lb.close(); });
+OTHER.forEach((p, i) => { if (p.slides.length > 1) swipe(document.querySelector(`[data-piece="${i}"]`), d => setSlide(i, at[i] + d)); });
+swipe($('#lb-stage'), d => { if (OTHER[lbI].slides.length > 1) lbStep(d); });
+document.addEventListener('click', e => {
+  const z = e.target.closest('[data-zoom]'); if (!z) return;
+  const on = z.closest('.frame').classList.toggle('frame--zoom');
+  z.textContent = on ? 'Уменьшить' : 'Увеличить';
+  const sc = z.closest('.frame').querySelector('.frame__scroll'); sc.scrollLeft = on ? (sc.scrollWidth - sc.clientWidth) / 2 : 0;
+});
+lb.addEventListener('keydown', e => {
+  if (OTHER[lbI].slides.length < 2) return;
+  if (e.key === 'ArrowLeft') lbStep(-1);
+  if (e.key === 'ArrowRight') lbStep(1);
+});
+
+/* ───────── переходы между экранами ───────── */
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const views = [...document.querySelectorAll('.view')];
+const ORDER = {home:0, sites:1, project:2, other:3};
+const nav = $('.pillnav'), ind = $('.ind');
+let shown = 'home', shownSite = null, run = 0;
+function moveInd(){
+  const a = nav.querySelector('a.is-on'); if (!a) return;
+  ind.style.width = a.offsetWidth + 'px';
+  ind.style.transform = `translateX(${a.offsetLeft}px)`;
+}
+async function route(token, push = true, instant = false){
+  token = token || '';
+  const site = byId(token);
+  const view = site ? 'project' : (token === 'sites' || token === 'other') ? token : 'home';
+  const on = token === 'contacts' ? 'contacts' : site ? 'sites' : view;
+  nav.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('is-on', a.dataset.nav === on));
+  moveInd();
+  if (push) { try { history.pushState({t: token}, '', token ? '#' + token : location.pathname + location.search); } catch (_) {} }
+  const toContacts = () => $('#contacts').scrollIntoView({behavior: calm ? 'auto' : 'smooth', block: 'center'});
+  const changed = view !== shown || (site && site.id !== shownSite);
+  if (!changed) { if (token === 'contacts') toContacts(); else window.scrollTo({top: 0, behavior: calm ? 'auto' : 'smooth'}); return; }
+  const prev = $('#v-' + shown), next = $('#v-' + view);
+  const dir = (ORDER[view] > ORDER[shown] || (view === 'project' && shown === 'project')) ? 1 : -1;
+  const swap = () => {
+    if (site) renderProject(site);
+    views.forEach(v => v.hidden = v !== next);
+    shown = view; shownSite = site ? site.id : null;
+    window.scrollTo(0, 0);
+    if (token === 'contacts') toContacts();
+  };
+  const my = ++run;
+  views.forEach(v => v.getAnimations().forEach(a => a.cancel()));
+  if (instant || calm || !prev.animate) { swap(); return; }
+  try {
+    await prev.animate([{opacity: 1, transform: 'none'}, {opacity: 0, transform: `translateX(${-dir * 36}px)`}],
+      {duration: 200, easing: 'ease-in', fill: 'forwards'}).finished;
+  } catch (_) { return; }
+  if (my !== run) return;
+  swap();
+  prev.getAnimations().forEach(a => a.cancel());
+  next.animate([{opacity: 0, transform: `translateX(${dir * 36}px)`}, {opacity: 1, transform: 'none'}],
+    {duration: 480, easing: 'cubic-bezier(.2,.7,.2,1)'});
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-go]');
+  if (el) { e.preventDefault(); route(el.dataset.go); }
+});
+document.addEventListener('keydown', e => {
+  const el = e.target.closest && e.target.closest('[role="button"][data-go]');
+  if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); route(el.dataset.go); }
+});
+window.addEventListener('popstate', e => route(e.state ? e.state.t : location.hash.slice(1), false));
+window.addEventListener('resize', moveInd);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInd);
+route(location.hash.slice(1), false, true);
+requestAnimationFrame(() => requestAnimationFrame(() => nav.classList.add('ready')));
+</script>
+</body>
+</html>
