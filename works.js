@@ -39,17 +39,25 @@ const RING = [
 
 /* ───────── ОСТАЛЬНОЕ ─────────
    slides — сколько угодно картинок: если их больше одной, появляются стрелки.
-   span — ширина плитки из 12 колонок; ar — пропорции плитки (auto = по высоте ряда); mr — пропорции на телефоне. */
+   span — ширина плитки из 12 колонок (в одном ряду сумма 12); ar — пропорции плитки
+   (auto = по высоте ряда); mr — пропорции на телефоне. */
 const OTHER = [
-  {name:'Превью', kind:'Обложки для YouTube', span:8, ar:'16/9', mr:'16/9', fit:'cover', slides:[
+  {name:'Превью', kind:'Обложки для YouTube', span:7, ar:'16/9', mr:'16/9', fit:'cover', slides:[
     {src:'prev-1.jpg', alt:'Превью «Сердце скажет спасибо»'},
     {src:'prev-2.jpg', alt:'Превью для ролика о Minecraft'}]},
-  {name:'Переходник', kind:'Страница со ссылками', span:4, ar:'auto', mr:'4/5', fit:'contain phone', slides:[
-    {src:'links.jpg', alt:'Макет страницы со ссылками'}]},
-  {name:'Карточка товара', kind:'Для маркетплейса', span:4, ar:'3/4', mr:'3/4', fit:'cover', slides:[
+  {name:'Карточка товара', kind:'Для маркетплейса', span:3, ar:'auto', mr:'3/4', fit:'cover', slides:[
     {src:'card.jpg', alt:'Карточка товара: широкие брюки с леопардовым принтом'}]},
-  {name:'Журнал', kind:'Разворот о стиле и уходе', span:8, ar:'auto', mr:'3/2', fit:'contain', slides:[
-    {src:'journal-spread.jpg', alt:'Разворот журнала'},
-    {src:'journal-1.jpg', alt:'Журнал, страница 1: Fashion look'},
-    {src:'journal-2.jpg', alt:'Журнал, страница 2: Beauty and care'}]},
+  {name:'Переходник', kind:'Страница со ссылками', span:2, ar:'auto', mr:'4/5', fit:'contain phone', slides:[
+    {src:'links.jpg', alt:'Макет страницы со ссылками'}]},
+];
+
+/* ───────── ЖУРНАЛЫ ─────────
+   Один журнал — одна строка. Страницы сохраняются картинками и называются по порядку:
+   mag5-01.jpg, mag5-02.jpg, ... Здесь prefix — начало имени файлов, pages — число страниц.
+   Порядок строк = порядок журналов на сайте. */
+const MAGS = [
+  {name:"Milana's Magazine", prefix:'mag1', pages:16},
+  {name:"Nadya's Magazine",  prefix:'mag3', pages:24},
+  {name:'Юля и Кирилл',      prefix:'mag4', pages:24},
+  {name:'Fashion look',      prefix:'mag2', pages:2},
 ];
