@@ -59,5 +59,7 @@ const MAGS = [
   {name:"Milana's Magazine", prefix:'mag1', pages:16},
   {name:"Nadya's Magazine",  prefix:'mag3', pages:24},
   {name:'Юля и Кирилл',      prefix:'mag4', pages:24},
+  {name:"Alena's Magazine",  prefix:'mag5', pages:32},
+  {name:"Kristina's Magazine", prefix:'mag6', pages:24},
   {name:'Fashion look',      prefix:'mag2', pages:2},
 ];
