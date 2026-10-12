@@ -63,3 +63,11 @@ const MAGS = [
   {name:"Kristina's Magazine", prefix:'mag6', pages:24},
   {name:'Fashion look',      prefix:'mag2', pages:2},
 ];
+
+/* ───────── ПРЕЗЕНТАЦИИ ─────────
+   Одна презентация — одна строка. Слайды сохраняются картинками 16:9:
+   pres3-01.jpg, pres3-02.jpg, ... Здесь pages — число слайдов, kind — подпись под названием. */
+const DECKS = [
+  {name:'Грядка', kind:'Питч для инвесторов', prefix:'pres1', pages:10},
+  {name:'Архитектура сна', kind:'Научно-популярная лекция', prefix:'pres2', pages:9},
+];

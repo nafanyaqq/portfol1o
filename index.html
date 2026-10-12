@@ -235,7 +235,13 @@ dialog.lb{height:100dvh;overscroll-behavior:contain}
   .contact{scroll-margin-top:16px}
 }
 @media (max-width:350px){.pillnav a{padding:10px 8px;font-size:12.5px}}
-/* журналы и пятый пункт меню */
+/* журналы, презентации и пункты меню */
+.pieces--decks .work__meta h3{font-size:24px}
+.pieces--decks .piece__media{flex:0 0 auto}
+.page__head .tags{margin-top:4px}
+@media (max-width:720px){.pillnav a[data-nav="contacts"]{display:none}.pillnav.pillnav a{padding:11px 8px;font-size:13px}}
+@media (max-width:384px){.pillnav.pillnav a{padding:10px 5px;font-size:12px}}
+@media (max-width:340px){.pillnav.pillnav a{padding:9px 4px;font-size:10.5px}}
 .pillnav a{display:flex;align-items:center}
 .nav-ico{display:none;width:16px;height:16px}
 .pieces--mags .work__meta h3{font-size:22px}
@@ -266,6 +272,7 @@ dialog.lb{height:100dvh;overscroll-behavior:contain}
       <a href="#" data-go="" data-nav="home" aria-label="Главная"><svg class="nav-ico" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 7.2 8 2.5l5.5 4.7V13a.5.5 0 0 1-.5.5H9.8V10H6.2v3.5H3a.5.5 0 0 1-.5-.5Z"/></svg><span>Главная</span></a>
       <a href="#sites" data-go="sites" data-nav="sites">Сайты</a>
       <a href="#mags" data-go="mags" data-nav="mags">Журналы</a>
+      <a href="#decks" data-go="decks" data-nav="decks">Презентации</a>
       <a href="#other" data-go="other" data-nav="other">Остальное</a>
       <a href="#contacts" data-go="contacts" data-nav="contacts">Контакты</a>
     </nav>
@@ -393,6 +400,19 @@ dialog.lb{height:100dvh;overscroll-behavior:contain}
     </div>
   </section>
 
+  <!-- ───────── презентации ───────── -->
+  <section class="view" id="v-decks" hidden>
+    <div class="wrap page">
+      <button class="back" type="button" data-go=""><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5"/></svg>На главную</button>
+      <div class="page__head">
+        <h1>Презентации<sup id="n-decks"></sup></h1>
+        <p>Собираю презентации под задачу: от аккуратного шаблона на несколько слайдов до питча для инвесторов или лекции с графиками и схемами. Сдаю в PPTX, который открывается и правится в PowerPoint, Keynote и Google Slides, или в PDF, если презентацию нужно просто отправить или распечатать.</p>
+        <div class="tags"><span>PPTX</span><span>PDF</span><span>Редактируемые графики</span><span>Свой шаблон слайдов</span></div>
+      </div>
+      <div class="pieces pieces--decks" id="g-decks"></div>
+    </div>
+  </section>
+
   <!-- ───────── остальное ───────── -->
   <section class="view" id="v-other" hidden>
     <div class="wrap page">
@@ -414,7 +434,7 @@ dialog.lb{height:100dvh;overscroll-behavior:contain}
   <div class="lb__cap" id="lb-cap"></div>
 </dialog>
 
-<footer class="wrap foot"><span>© 2026 Портфолио</span><span>Сайты · Журналы · Остальное · Контакты</span></footer>
+<footer class="wrap foot"><span>© 2026 Портфолио</span><span>Сайты · Журналы · Презентации · Остальное · Контакты</span></footer>
 
 <script src="works.js"></script>
 <script>
@@ -466,9 +486,11 @@ function renderProject(s){
 const CH_L = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 5 8l5 5"/></svg>';
 const CH_R = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>';
 const plural = n => (n % 10 === 1 && n % 100 !== 11) ? 'страница' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'страницы' : 'страниц';
-const MAG_PIECES = MAGS.map(m => ({name: m.name, kind: m.pages + ' ' + plural(m.pages), span: 3, ar: '3/4', mr: '3/4', fit: 'cover',
-  slides: Array.from({length: m.pages}, (_, k) => ({src: m.prefix + '-' + String(k + 1).padStart(2, '0') + '.jpg', alt: m.name + ', страница ' + (k + 1)}))}));
-const ALL = OTHER.concat(MAG_PIECES);
+const pagesOf = (m, word) => Array.from({length: m.pages}, (_, k) => ({src: m.prefix + '-' + String(k + 1).padStart(2, '0') + '.jpg', alt: m.name + ', ' + word + ' ' + (k + 1)}));
+const slidesWord = n => (n % 10 === 1 && n % 100 !== 11) ? 'слайд' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'слайда' : 'слайдов';
+const MAG_PIECES = MAGS.map(m => ({name: m.name, kind: m.pages + ' ' + plural(m.pages), span: 3, ar: '3/4', mr: '3/4', fit: 'cover', slides: pagesOf(m, 'страница')}));
+const DECK_PIECES = DECKS.map(m => ({name: m.name, kind: m.kind + ' · ' + m.pages + ' ' + slidesWord(m.pages), span: 6, ar: '16/9', mr: '16/9', fit: 'cover', slides: pagesOf(m, 'слайд')}));
+const ALL = OTHER.concat(MAG_PIECES, DECK_PIECES);
 const pieceHTML = (p, i) => `
   <article class="piece ${p.fit.split(' ').map(f => 'piece--' + f).join(' ')}" style="--span:${p.span};--ar:${p.ar};--mr:${p.mr}">
     <div class="piece__media" data-piece="${i}">
@@ -484,6 +506,8 @@ const pieceHTML = (p, i) => `
 $('#g-other').innerHTML = OTHER.map((p, i) => pieceHTML(p, i)).join('');
 $('#g-mags').innerHTML = MAG_PIECES.map((p, k) => pieceHTML(p, OTHER.length + k)).join('');
 $('#n-mags').textContent = MAGS.length;
+$('#g-decks').innerHTML = DECK_PIECES.map((p, k) => pieceHTML(p, OTHER.length + MAG_PIECES.length + k)).join('');
+$('#n-decks').textContent = DECKS.length;
 const at = ALL.map(() => 0);
 /* свайп пальцем влево-вправо; после свайпа ближайший «клик» игнорируется */
 let swipedAt = 0;
@@ -528,6 +552,7 @@ const onPiece = e => {
 };
 $('#g-other').addEventListener('click', onPiece);
 $('#g-mags').addEventListener('click', onPiece);
+$('#g-decks').addEventListener('click', onPiece);
 $('#lb-prev').addEventListener('click', () => lbStep(-1));
 $('#lb-next').addEventListener('click', () => lbStep(1));
 $('#lb-close').addEventListener('click', () => lb.close());
@@ -550,7 +575,7 @@ lb.addEventListener('keydown', e => {
 /* ───────── переходы между экранами ───────── */
 const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const views = [...document.querySelectorAll('.view')];
-const ORDER = {home:0, sites:1, project:2, mags:3, other:4};
+const ORDER = {home:0, sites:1, project:2, mags:3, decks:4, other:5};
 const nav = $('.pillnav'), ind = $('.ind');
 let shown = 'home', shownSite = null, run = 0;
 function moveInd(){
@@ -561,7 +586,7 @@ function moveInd(){
 async function route(token, push = true, instant = false){
   token = token || '';
   const site = byId(token);
-  const view = site ? 'project' : (token === 'sites' || token === 'mags' || token === 'other') ? token : 'home';
+  const view = site ? 'project' : (token === 'sites' || token === 'mags' || token === 'decks' || token === 'other') ? token : 'home';
   const on = token === 'contacts' ? 'contacts' : site ? 'sites' : view;
   nav.querySelectorAll('[data-nav]').forEach(a => a.classList.toggle('is-on', a.dataset.nav === on));
   moveInd();
